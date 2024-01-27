@@ -1,0 +1,23 @@
+version: '3'
+services:
+  web:
+    image: registry.cn-hangzhou.aliyuncs.com/zobel/palworldtools:web-v1.0.2
+    container_name: web
+    ports:
+      - "80:80"
+    networks:
+      - main # 填入一个docker网络名称
+
+  server:
+    image: registry.cn-hangzhou.aliyuncs.com/zobel/palworldtools:server-v1.0.1
+    container_name: server
+    ports:
+      - "8080:8080"
+    networks:
+      - main # 填入一个docker网络名称
+    depends_on:
+      - web
+
+networks:
+  main: # 需要新建一个外部docker网络
+    external: true
